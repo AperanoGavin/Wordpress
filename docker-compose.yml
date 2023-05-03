@@ -1,7 +1,7 @@
 version: "3"
 services:
   database:
-    image: mysql
+    image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: wppassword
@@ -9,7 +9,7 @@ services:
       MYSQL_USER: wpuser
       MYSQL_PASSWORD: wppassword
     volumes:
-      - mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql 
 
   wordpress:
     depends_on:
@@ -24,6 +24,8 @@ services:
       WORDPRESS_DB_PASSWORD: wppassword
       WORDPRESS_DB_NAME: wpdb
     volumes:
-      ["./:/var/www/html"]
+      - ./:/var/www/html
+      - ./apache.conf:/etc/apache2/conf-enabled/apache.conf:ro
+
 volumes:
   mysql: {}
