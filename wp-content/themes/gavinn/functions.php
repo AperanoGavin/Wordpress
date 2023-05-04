@@ -1,6 +1,7 @@
 <?php
 function getTitle (){
     add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
 };
 
 
@@ -19,7 +20,7 @@ function register_assets (){
 };
 
 function title( $title){
-    return '';
+    return '|';
 }
 
 add_action('after_setup_theme', 'getTitle');
