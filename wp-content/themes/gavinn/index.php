@@ -13,7 +13,7 @@ get_header() ?>
                 </div>
             </div>
          </div> 
-        <?php endwhile ?>
+        <?php endwhile; ?>
         
     </div> 
 <?php else: ?>
