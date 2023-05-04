@@ -4,6 +4,8 @@ function getTitle (){
     add_theme_support( 'post-thumbnails' );
     add_theme_support('menus');
     register_nav_menu('header', "C'est l'en tete du menu");
+    register_nav_menu('footer', "En bas de la page");
+
 };
 
 
