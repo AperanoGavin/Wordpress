@@ -2,6 +2,8 @@
 function getTitle (){
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
+    add_theme_support('menus');
+    register_nav_menu('header', "C'est l'en tete du menu");
 };
 
 
@@ -23,7 +25,20 @@ function title( $title){
     return '|';
 }
 
+function menu( array $class){
+    
+    $class[] = 'nav-item';
+    return $class ;
+}
+
+function link_class( $attr){
+    $attr['class'] = 'nav-link';
+    return $attr ;
+}
+
 add_action('after_setup_theme', 'getTitle');
 add_action('wp_enqueue_scripts' , 'register_assets');
 
 add_filter('document_title_separateur', 'title' );
+add_filter('nav_menu_css_class', 'menu');
+add_filter('nav_menu_link_attributes' , 'link_class');
