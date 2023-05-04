@@ -37,12 +37,12 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul> -->
-    <?php wp_nav_menu([
-        'theme_location' => 'header' ,
-         'container' => 'false',
-         'menu_class' => 'navbar-nav mr-auto'
+        <?php wp_nav_menu([
+            'theme_location' => 'header' ,
+            'container' => 'false',
+            'menu_class' => 'navbar-nav mr-auto'
 
-        ]) ?>
+            ]) ?>
         <?= get_search_form() ?>
   </div>
 </nav>
