@@ -39,6 +39,13 @@ function link_class( $attr){
 }
 
 
+function connexion_first(){
+    if( wp_get_current_user() === NULL) {
+         wp_redirect("http://gavinaperano.com:81/connexion/");
+            exit;
+    }
+}
+
 add_action('after_setup_theme', 'getTitle');
 add_action('wp_enqueue_scripts' , 'register_assets');
 
