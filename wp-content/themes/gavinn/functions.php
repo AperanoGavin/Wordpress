@@ -38,6 +38,7 @@ function link_class( $attr){
     return $attr ;
 }
 
+
 add_action('after_setup_theme', 'getTitle');
 add_action('wp_enqueue_scripts' , 'register_assets');
 

@@ -2,7 +2,6 @@
 /**
  *  Template Name: Page avec Bannière
  */
-
 ?>
 <?php
 get_header() ?>

@@ -16,6 +16,12 @@ get_header() ?>
         <?php endwhile; ?>
         
     </div> 
+
+   
+    <nav aria-label="Page navigation example">
+        <?= paginate_links(['type'=> 'list']) ?>
+    </nav>
+   
 <?php else: ?>
     <h1> Dont have an article </h1>
 
