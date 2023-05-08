@@ -15,7 +15,7 @@ Cloner le dépôt GitHub :
 
 bash
 Copy code
-git clone https://github.com/votre-utilisateur/mon-projet.git
+git clone https://github.com/AperanoGavin/Wordpress
 Copier le répertoire du thème dans le répertoire wp-content/themes de votre installation WordPress.
 
 Activer le thème personnalisé dans l'administration de WordPress.
