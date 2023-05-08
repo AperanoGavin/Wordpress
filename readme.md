@@ -18,7 +18,7 @@ Ce projet est un site WordPress développé avec mon propre thème personnalisé
 1. Cloner le dépôt GitHub :
 
    ```bash
-   git clone https://github.com/AperanoGavin/Wordpress
+   git clone https://github.com/AperanoGavin/Wordpress.git
    ```
 
 2. Copier le répertoire du thème dans le répertoire `wp-content/themes` de votre installation WordPress.
