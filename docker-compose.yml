@@ -3,17 +3,21 @@ services:
   database:
     image: mysql:latest
     restart: always
+    networks:
+      - yournetwork
     environment:
       MYSQL_ROOT_PASSWORD: wppassword
       MYSQL_DATABASE: wpdb
       MYSQL_USER: wpuser
-      MYSQL_PASSWORD: wppassword
+      MYSQL_PASSWORD: wppassword 
     volumes:
       - mysql:/var/lib/mysql 
 
   wordpress:
     depends_on:
       - database
+    networks:
+      - yournetwork  
     image: wordpress:latest
     restart: always
     ports:
