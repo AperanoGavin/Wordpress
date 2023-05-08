@@ -3,8 +3,6 @@ services:
   database:
     image: mysql:latest
     restart: always
-    networks:
-      - yournetwork
     environment:
       MYSQL_ROOT_PASSWORD: wppassword
       MYSQL_DATABASE: wpdb
@@ -16,8 +14,6 @@ services:
   wordpress:
     depends_on:
       - database
-    networks:
-      - yournetwork  
     image: wordpress:latest
     restart: always
     ports:
