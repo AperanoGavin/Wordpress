@@ -61,6 +61,9 @@ $table_name = $wpdb->prefix . 'custom_user';
 
 $charset_collate = $wpdb->get_charset_collate();
 
+$ssql = "DROP TABLE IF EXISTS $table_name";
+$wpdb->query($ssql);
+
 $sql = "CREATE TABLE $table_name (
     id int(11) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
@@ -81,8 +84,6 @@ $wpdb->insert(
         'role' => 'user'
     )
     );
-
-//afficher les données de la base de données
 
  $results = $wpdb->get_results("SELECT * FROM $table_name");
 
