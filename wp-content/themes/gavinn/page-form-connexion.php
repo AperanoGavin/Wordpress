@@ -20,21 +20,17 @@ if(isset($_POST['submit'])) {
 
     // check if form submission is valid
     if(wp_verify_nonce($_POST['_wpnonce'], 'custom-connection-form')) {
-        // attempt to log in user
-        $creds = array(
-            'user_login' => $username,
-            'user_password' => $password,
-            'remember' => true
-        );
-        $user = wp_signon($creds, false);
-
-        if(is_wp_error($user)) {
-            $errors[] = $user->get_error_message();
-        } else {
-            // redirect user after successful login
-            wp_redirect(home_url('/'));
+        // verifier si l'utilisateur existe dans la table wp_custom_user
+       var_dump($user = $wpdb->get_row("SELECT * FROM {$table_name} WHERE username = '{$username}' AND password = '{$password}'")) ;
+        if($user) {
+            // connecter l'utilisateur
+            wp_set_auth_cookie($user->id);
+            wp_redirect(home_url());
             exit;
+        } else {
+            $errors[] = 'Invalid username or password';
         }
+       
     } else {
         $errors[] = 'Invalid form submission';
     }
@@ -46,18 +42,11 @@ get_header(); ?>
     <main id="main" class="site-main" role="main">
         <?php if(!is_user_logged_in()): ?>
         <h1>Connection Form</h1>
-        <?php if(!empty($errors)): ?>
-        <div class="error">
-            <?php foreach($errors as $error): ?>
-            <p><?php echo $error; ?></p>
-            <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
         <form id="connection-form" method="post">
             <?php wp_nonce_field('custom-connection-form'); ?>
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="form-control" />
+                <label for="username">name</label>
+                <input type="text" name="name" id="username" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
