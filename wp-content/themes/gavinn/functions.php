@@ -52,3 +52,40 @@ add_action('wp_enqueue_scripts' , 'register_assets');
 add_filter('document_title_separateur', 'title' );
 add_filter('nav_menu_css_class', 'menu');
 add_filter('nav_menu_link_attributes' , 'link_class');
+
+
+global $wpdb;
+
+// Define the table name with the proper prefix
+$table_name = $wpdb->prefix . 'custom_user';
+
+$sql = "CREATE TABLE $table_name (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    role varchar(255) NOT NULL DEFAULT 'user',
+    PRIMARY KEY  (id)
+  );";  
+$wpdb->query($sql);
+
+$wpdb->insert(
+    $table_name,
+    array(
+        'id' => 1,
+        'name' => 'david',
+        'email' => 'audesandrine6@gmail.com',
+        'password' => '123456',
+        'role' => 'user'
+    )
+    );
+
+//afficher les données de la base de données
+
+ $results = $wpdb->get_results("SELECT * FROM $table_name");
+
+ echo '<pre>';
+    print_r($results);
+ echo '</pre>';
+
+

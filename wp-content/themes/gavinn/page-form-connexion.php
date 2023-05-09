@@ -6,7 +6,7 @@ Template Name: Custom Connection Form
 
 if(isset($_POST['submit'])) {
     // retrieve form data
-    $username = $_POST['username'];
+    $username = $_POST['name'];
     $password = $_POST['password'];
 
     // validate form data
