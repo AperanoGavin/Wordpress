@@ -59,6 +59,8 @@ global $wpdb;
 // Define the table name with the proper prefix
 $table_name = $wpdb->prefix . 'custom_user';
 
+$charset_collate = $wpdb->get_charset_collate();
+
 $sql = "CREATE TABLE $table_name (
     id int(11) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
@@ -66,7 +68,7 @@ $sql = "CREATE TABLE $table_name (
     password varchar(255) NOT NULL,
     role varchar(255) NOT NULL DEFAULT 'user',
     PRIMARY KEY  (id)
-  );";  
+  )$charset_collate;";  
 $wpdb->query($sql);
 
 $wpdb->insert(
