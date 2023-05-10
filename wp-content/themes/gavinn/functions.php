@@ -87,6 +87,8 @@ $wpdb->insert(
 
  $results = $wpdb->get_results("SELECT * FROM $table_name");
 
+ var_dump($user = $wpdb->get_results("SELECT * FROM wp_custom_user WHERE name = 'david' AND password = '123456'")) ;
+
  echo '<pre>';
     print_r($results);
  echo '</pre>';
