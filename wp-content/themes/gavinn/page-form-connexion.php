@@ -4,37 +4,32 @@
 Template Name: Custom Connection Form
 */
 
+ini_set('display_errors', 1); error_reporting(E_ALL);
 if(isset($_POST['submit'])) {
     // retrieve form data
-    $name = $_POST['name'];
+    $name = sanitize_text_field($_POST['name']);
     $password = $_POST['password'];
 
-    // validate form data
     $errors = array();
     if(empty($name)) {
-        $errors[] = 'Please enter your username';
+        $errors[] = 'Please enter your name';
     }
     if(empty($password)) {
         $errors[] = 'Please enter your password';
     }
 
-    // check if form submission is valid
-    if(wp_verify_nonce($_POST['_wpnonce'], 'custom-connection-form')) {
-        global $wpdb;
-        // verifier si l'utilisateur existe dans la table wp_custom_user
-        $user = $wpdb->get_results("SELECT * FROM wp_custom_user WHERE name = ". $name ." AND password = ". $password ."  ") ;
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'custom_user';
+    $user = $wpdb->get_row($wpdb->prepare("SELECT * FROM wp_custom_user WHERE name = %s", $name));
 
-        if($user !== NULL ) {
-            // connecter l'utilisateur
-            wp_set_auth_cookie($user->id);
-            wp_redirect(home_url());
-            exit;
-        } else {
-            $errors[] = 'Invalid username or password';
-        }
-       
+    if ($user && wp_check_password($password, $user->password)) {
+        // Connexion réussie
+        wp_set_auth_cookie($user->ID);
+        wp_redirect(home_url('/')); // Rediriger vers la page d'accueil ou toute autre page de votre choix
+        exit;
     } else {
-        $errors[] = 'Invalid form submission';
+        // Identifiants incorrects
+        $error_message = 'Identifiants invalides. Veuillez réessayer.';
     }
 }
 
@@ -46,10 +41,17 @@ get_header(); ?>
     <main id="main" class="site-main" role="main">
         <?php if(!is_user_logged_in()): ?>
         <h1>Connection Form</h1>
-        <form id="connection-form" method="post">
-            <?php wp_nonce_field('custom-connection-form'); ?>
+        <?php if(!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <?php foreach($errors as $error): ?>
+            <p><?php echo $error; ?></p>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+        <form id="connection-form" method="post" action="" >
+            <?php // wp_nonce_field('custom-connection-form'); ?>
             <div class="form-group">
-                <label for="username">name</label>
+                <label for="name">name</label>
                 <input type="text" name="name" id="name" class="form-control" />
             </div>
             <div class="form-group">

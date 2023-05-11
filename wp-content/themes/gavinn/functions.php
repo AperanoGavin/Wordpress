@@ -39,13 +39,6 @@ function link_class( $attr){
 }
 
 
-function connexion_first(){
-    if( wp_get_current_user() === NULL) {
-         wp_redirect("http://gavinaperano.com:81/connexion/");
-            exit;
-    }
-}
-
 add_action('after_setup_theme', 'getTitle');
 add_action('wp_enqueue_scripts' , 'register_assets');
 
@@ -80,14 +73,14 @@ $wpdb->insert(
         'id' => 1,
         'name' => 'david',
         'email' => 'audesandrine6@gmail.com',
-        'password' => '123456',
+        'password' => wp_hash_password('12345'),
         'role' => 'user'
     )
     );
 
  $results = $wpdb->get_results("SELECT * FROM $table_name");
 
- var_dump($user = $wpdb->get_results("SELECT * FROM wp_custom_user WHERE name = 'david' AND password = '123456'")) ;
+ var_dump($user = $wpdb->get_results("SELECT * FROM wp_custom_user WHERE name = 'david' AND password = ")) ;
 
  echo '<pre>';
     print_r($results);
