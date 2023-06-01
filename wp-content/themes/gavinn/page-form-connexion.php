@@ -22,6 +22,7 @@ if(isset($_POST['submit'])) {
     $table_name = $wpdb->prefix . 'custom_user';
     $user = $wpdb->get_row($wpdb->prepare("SELECT * FROM wp_custom_user WHERE name = %s", $name));
 
+    
     if ($user && wp_check_password($password, $user->password)) {
         // Connexion réussie
         wp_set_auth_cookie($user->ID);
