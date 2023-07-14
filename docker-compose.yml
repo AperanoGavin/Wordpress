@@ -44,5 +44,11 @@ services:
       - ./:/var/www/html
       - ./apache.conf:/etc/apache2/conf-enabled/apache.conf:ro
 
+
 volumes:
-  mysql: {}
+  mysql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./sql

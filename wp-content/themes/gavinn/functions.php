@@ -47,7 +47,7 @@ add_filter('nav_menu_css_class', 'menu');
 add_filter('nav_menu_link_attributes' , 'link_class');
 
 
-global $wpdb;
+/* global $wpdb;
 
 // Define the table name with the proper prefix
 $table_name = $wpdb->prefix . 'custom_user';
@@ -84,6 +84,6 @@ $wpdb->insert(
 
  echo '<pre>';
     print_r($results);
- echo '</pre>';
+ echo '</pre>'; */
 
 

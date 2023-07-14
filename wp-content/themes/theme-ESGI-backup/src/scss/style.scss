@@ -1,0 +1,29 @@
+/*
+Theme Name: Esgi Thème
+Theme URI: https://esgi.fr
+Author: the ESGI team
+Author URI: https://wordpress.org/
+Description: Thème d'exercice de développement
+Requires at least: 5.3
+Tested up to: 6.0
+Requires PHP: 5.6
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: ESGI
+
+*/
+
+
+@import 'vendor/bootstrap-grid';
+@import 'vendor/normalize';
+@import 'partials/fonts';
+@import 'partials/colors';
+@import 'partials/functions';
+@import 'partials/globals';
+
+@import 'components/header';
+@import 'components/footer';
+@import 'components/posts-list';
+@import 'components/identity-card';
+
