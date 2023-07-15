@@ -1,9 +1,87 @@
-<?php get_header() ?>
+<?php get_header(); ?>
 
-<main id="site-content">
-	<div class="container">
-		<?php get_template_part('template-parts/identity-card'); // pas besoin de l'extension ?>
-	</div>
-</main>
+<section class="title-section">
+    <div class="container">
+        <h1><?php echo get_theme_mod('homepage_title', 'Titre de la page d\'accueil'); ?></h1>
+    </div>
+</section>
 
-<?php get_footer() ?>
+<section class="image-section">
+    <div class="container">
+        <?php $featured_image = get_theme_mod('homepage_featured_image'); ?>
+        <?php if ($featured_image) : ?>
+            <img src="<?php echo $featured_image; ?>" alt="Image de mise en avant" class="custom-image">
+        <?php endif; ?>
+    </div>
+</section>
+
+<section class="description-section">
+    <div class="container">
+        <h4><?php echo get_theme_mod('about_title', 'À propos de nous'); ?></h4>
+        <p><?php echo get_theme_mod('about_content', 'Contenu à propos de nous'); ?></p>
+    </div>
+</section>
+
+<section class="image-left-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <?php $left_image = get_theme_mod('left_image'); ?>
+                <?php if ($left_image) : ?>
+                    <img src="<?php echo $left_image; ?>" alt="Image de gauche">
+                <?php endif; ?>
+            </div>
+            <div class="col-md-6">
+                <p><?php echo get_theme_mod('right_description', 'Description de droite'); ?></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="container">
+        <h4><?php echo get_theme_mod('services_title', 'Nos Services'); ?></h4>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="<?php echo get_theme_mod('service_image_1'); ?>" alt="Image 1">
+            </div>
+            <div class="col-md-3">
+                <img src="<?php echo get_theme_mod('service_image_2'); ?>" alt="Image 2">
+            </div>
+            <div class="col-md-3">
+                <img src="<?php echo  get_theme_mod('service_image_3'); ?>" alt="Image 3">
+            </div>
+            <div class="col-md-3">
+                <img src="<?php echo get_theme_mod('service_image_4'); ?>" alt="Image 4">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="partners-section">
+    <div class="container">
+        <h4><?php echo get_theme_mod('partners_title', 'Nos Partenaires'); ?></h4>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_1'); ?>" alt="Logo 1">
+            </div>
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_2'); ?>" alt="Logo 2">
+            </div>
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_3'); ?>" alt="Logo 3">
+            </div>
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_4'); ?>" alt="Logo 4">
+            </div>
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_5'); ?>" alt="Logo 5">
+            </div>
+            <div class="col-md-2">
+                <img src="<?php echo get_theme_mod('partner_logo_6'); ?>" alt="Logo 6">
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php get_footer(); ?>

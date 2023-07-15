@@ -1,4 +1,18 @@
 <?php
+/*
+Template Name: esgi-customize
+
+*/
+
+
+
+function allow_svg_uploads($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_uploads');
+
+
 // Déclaration des emplacements de menu
 
 add_action('init', 'esgi_init');
@@ -14,11 +28,33 @@ function esgi_after_setup_theme(){
 	add_theme_support('custom-logo');
 }
 
+function enqueue_bootstrap() {
+    wp_enqueue_style('bootstrap', get_template_directory_uri() . '/src/bootstrap/css/bootstrap.css');
+    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/src/bootstrap/js/bootstrap.js', array('jquery'), '5.0.0', true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
+
 // chargement de la feuille de style
 
 add_action('wp_enqueue_scripts', 'esgi_enqueue_assets');
 function esgi_enqueue_assets(){
 	wp_enqueue_style('main', get_stylesheet_uri());
+}
+
+
+add_filter('wp_nav_menu_items', 'add_bootstrap_classes_to_menu', 10, 2);
+function add_bootstrap_classes_to_menu($items, $args) {
+    if ($args->theme_location == 'primary_menu') {
+        $items = str_replace('class="menu-item', 'class="menu-item nav-item', $items);
+        $items = str_replace('<a', '<a class="nav-link"', $items);
+		//change la couleur du menu pour le mettre en noir
+		$items = str_replace('class="nav-link"', 'class="nav-link text-dark"', $items);
+		//deplace le menu un peu plus à gauche
+		$items = str_replace('class="nav-link text-dark"', 'class="nav-link text-dark ms-3"', $items);
+		//encore un peu plus à gauche
+		$items = str_replace('class="nav-link text-dark ms-3"', 'class="nav-link text-dark ms-5"', $items);
+    }
+    return $items;
 }
 
 function getIcon($icon){
@@ -42,3 +78,280 @@ function getIcon($icon){
 	return $$icon;
 
 }
+
+
+function register_customizer_sections($wp_customize) {
+    // Section du titre
+    $wp_customize->add_section('title-section', array(
+        'title' => 'Section du titre',
+        'priority' => 10,
+    ));
+
+    // Section de l'image
+    $wp_customize->add_section('image-section', array(
+        'title' => 'Section de l\'image',
+        'priority' => 20,
+    ));
+
+    // Section de la description
+    $wp_customize->add_section('description-section', array(
+        'title' => 'Section de la description',
+        'priority' => 30,
+    ));
+
+    // Section de l'image à gauche
+    $wp_customize->add_section('image-left-section', array(
+        'title' => 'Section de l\'image à gauche',
+        'priority' => 40,
+    ));
+
+    // Section des services
+    $wp_customize->add_section('services-section', array(
+        'title' => 'Section des services',
+        'priority' => 50,
+    ));
+
+    // Section des partenaires
+    $wp_customize->add_section('partners-section', array(
+        'title' => 'Section des partenaires',
+        'priority' => 60,
+    ));
+
+
+
+    // Ajoutez d'autres sections si nécessaire
+}
+add_action('customize_register', 'register_customizer_sections');
+
+
+function register_customizer_settings($wp_customize) {
+    // Titre
+    $wp_customize->add_setting('homepage_title', array(
+        'default' => 'Titre de la page d\'accueil',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('homepage_title', array(
+        'label' => 'Titre de la page d\'accueil',
+        'section' => 'title-section',
+        'settings' => 'homepage_title',
+        'type' => 'text',
+    ));
+
+    // Image de mise en avant
+    $wp_customize->add_setting('homepage_featured_image', array(
+        'default' => '',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'homepage_featured_image', array(
+        'label' => 'Image de mise en avant',
+        'section' => 'image-section',
+        'settings' => 'homepage_featured_image',
+    )));
+
+    // Description à propos de nous
+    $wp_customize->add_setting('about_title', array(
+        'default' => 'À propos de nous',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('about_title', array(
+        'label' => 'Titre de la section à propos de nous',
+        'section' => 'description-section',
+        'settings' => 'about_title',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('about_content', array(
+        'default' => 'Contenu à propos de nous',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('about_content', array(
+        'label' => 'Contenu à propos de nous',
+        'section' => 'description-section',
+        'settings' => 'about_content',
+        'type' => 'textarea',
+    ));
+
+    // Image à gauche
+	$wp_customize->add_setting('left_image', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'image_left', array(
+		'label' => 'Image à gauche',
+		'section' => 'image-left-section',
+		'settings' => 'left_image',
+	)));
+
+	//description à droite
+
+	$wp_customize->add_setting('right_description', array(
+		'default' => 'Description à droite',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('right_description', array(
+		'label' => 'Description à droite',
+		'section' => 'image-left-section',
+		'settings' => 'right_description',
+		'type' => 'textarea',
+	));
+
+
+	// Services
+	$wp_customize->add_setting('services_title', array(
+		'default' => 'Nos services',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('services_title', array(
+		'label' => 'Titre de la section services',
+		'section' => 'services-section',
+		'settings' => 'services_title',
+		'type' => 'text',
+	));
+
+	//service_image_1
+	$wp_customize->add_setting('service_image_1', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'service_image_1', array(
+		'label' => 'Image du service 1',
+		'section' => 'services-section',
+		'settings' => 'service_image_1',
+	)));
+
+	//service_image_2
+
+	$wp_customize->add_setting('service_image_2', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'service_image_2', array(
+		'label' => 'Image du service 2',
+		'section' => 'services-section',
+		'settings' => 'service_image_2',
+	)));
+
+	//service_image_3
+
+	$wp_customize->add_setting('service_image_3', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'service_image_3', array(
+		'label' => 'Image du service 3',
+		'section' => 'services-section',
+		'settings' => 'service_image_3',
+	)));
+
+	//service_image_4
+
+	$wp_customize->add_setting('service_image_4', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'service_image_4', array(
+		'label' => 'Image du service 4',
+		'section' => 'services-section',
+		'settings' => 'service_image_4',
+	)));
+
+	//partners_title
+	$wp_customize->add_setting('partners_title', array(
+		'default' => 'Nos partenaires',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('partners_title', array(
+		'label' => 'Titre de la section partenaires',
+		'section' => 'partners-section',
+		'settings' => 'partners_title',
+		'type' => 'text',
+	));
+
+	//partner_logo_1
+	
+	$wp_customize->add_setting('partner_logo_1', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_1', array(
+		'label' => 'Logo du partenaire 1',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_1',
+	)));
+
+	//partner_logo_2	
+	$wp_customize->add_setting('partner_logo_2', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_2', array(
+		'label' => 'Logo du partenaire 2',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_2',
+	)));
+	
+
+	$wp_customize->add_setting('partner_logo_3', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_3', array(
+		'label' => 'Logo du partenaire 3',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_3',
+	)));
+
+
+	$wp_customize->add_setting('partner_logo_4', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_4', array(
+		'label' => 'Logo du partenaire 4',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_4',
+	)));
+	$wp_customize->add_setting('partner_logo_5', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_5', array(
+		'label' => 'Logo du partenaire 5',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_5',
+	)));
+	$wp_customize->add_setting('partner_logo_6', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'partner_logo_6', array(
+		'label' => 'Logo du partenaire 6',
+		'section' => 'partners-section',
+		'settings' => 'partner_logo_6',
+	)));
+	
+
+	
+
+}
+
+add_action('customize_register', 'register_customizer_settings');
+

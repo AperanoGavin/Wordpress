@@ -1,7 +1,7 @@
 
 <?php
 /*
-Template Name: Custom Connection Form
+Template Name: esgi-customize
 */
 
 ini_set('display_errors', 1); error_reporting(E_ALL);

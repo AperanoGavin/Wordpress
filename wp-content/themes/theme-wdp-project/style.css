@@ -4327,3 +4327,24 @@ template {
 /*# sourceMappingURL=bootstrap-grid.min.css.map */
 
 /*# sourceMappingURL=style.css.map */
+
+.custom-image {
+/*   float: right;
+ */  margin-left: 20%;
+  margin-bottom: 20px;
+  clear: left;
+  max-width: 600px;
+
+}
+
+/* responsive maintenant */
+
+@media screen and (max-width: 600px) {
+  .custom-image {
+    float: none;
+    margin-left: 0;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
