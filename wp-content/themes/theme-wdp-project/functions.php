@@ -117,6 +117,34 @@ function register_customizer_sections($wp_customize) {
         'priority' => 60,
     ));
 
+	//section copr-section
+
+	$wp_customize->add_section('copr-section', array(
+		'title' => 'Section du footer',
+		'priority' => 70,
+	));
+
+	//section  image-section-service-page
+
+	$wp_customize->add_section('image-section-service-page', array(
+		'title' => 'Section de l\'image',
+		'priority' => 80,
+	));
+
+	//section contact-section
+
+	$wp_customize->add_section('contact-section', array(
+		'title' => 'Section de contact',
+		'priority' => 90,
+	));
+
+
+	//section info-contact
+
+	$wp_customize->add_section('contact-info-section', array(
+		'title' => 'Section d\'information de contact',
+		'priority' => 100,
+	));
 
 
     // Ajoutez d'autres sections si nécessaire
@@ -227,6 +255,42 @@ function register_customizer_settings($wp_customize) {
 		'settings' => 'service_image_1',
 	)));
 
+	$wp_customize->add_setting('service_image_1_title', array(
+        'default' => 'Manager',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('service_image_1_title', array(
+        'label' => 'Titre du service 1',
+        'section' => 'services-section',
+        'settings' => 'service_image_1_title',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('service_image_1_phone', array(
+        'default' => '+33 1 53 31 25 23',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('service_image_1_phone', array(
+        'label' => 'Numéro de téléphone du service 1',
+        'section' => 'services-section',
+        'settings' => 'service_image_1_phone',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('service_image_1_email', array(
+        'default' => 'info@esgi.com',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('service_image_1_email', array(
+        'label' => 'Adresse e-mail du service 1',
+        'section' => 'services-section',
+        'settings' => 'service_image_1_email',
+        'type' => 'text',
+    ));
+
 	//service_image_2
 
 	$wp_customize->add_setting('service_image_2', array(
@@ -239,6 +303,42 @@ function register_customizer_settings($wp_customize) {
 		'section' => 'services-section',
 		'settings' => 'service_image_2',
 	)));
+
+	$wp_customize->add_setting('service_image_2_title', array(
+		'default' => 'Manager',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_2_title', array(
+		'label' => 'Titre du service 2',
+		'section' => 'services-section',
+		'settings' => 'service_image_2_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('service_image_2_phone', array(
+		'default' => '+33 1 53 31 25 23',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_2_phone', array(
+		'label' => 'Numéro de téléphone du service 2',
+		'section' => 'services-section',
+		'settings' => 'service_image_2_phone',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('service_image_2_email', array(
+		'default' => 'info@esgi.com',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_2_email', array(
+		'label' => 'Adresse e-mail du service 2',
+		'section' => 'services-section',
+		'settings' => 'service_image_2_email',
+		'type' => 'text',
+	));
 
 	//service_image_3
 
@@ -253,6 +353,43 @@ function register_customizer_settings($wp_customize) {
 		'settings' => 'service_image_3',
 	)));
 
+	$wp_customize->add_setting('service_image_3_title', array(
+		'default' => 'Manager',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_3_title', array(
+		'label' => 'Titre du service 3',
+		'section' => 'services-section',
+		'settings' => 'service_image_3_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('service_image_3_phone', array(
+		'default' => '+33 1 53 31 25 23',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_3_phone', array(
+		'label' => 'Numéro de téléphone du service 3',
+		'section' => 'services-section',
+		'settings' => 'service_image_3_phone',
+		'type' => 'text',
+	));
+	
+	$wp_customize->add_setting('service_image_3_email', array(
+		'default' => 'info@esgi.com',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_3_email', array(
+		'label' => 'Adresse e-mail du service 3',
+		'section' => 'services-section',
+		'settings' => 'service_image_3_email',
+		'type' => 'text',
+	));
+
+
 	//service_image_4
 
 	$wp_customize->add_setting('service_image_4', array(
@@ -266,6 +403,42 @@ function register_customizer_settings($wp_customize) {
 		'settings' => 'service_image_4',
 	)));
 
+	$wp_customize->add_setting('service_image_4_title', array(
+		'default' => 'Manager',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_4_title', array(
+		'label' => 'Titre du service 4',
+		'section' => 'services-section',
+		'settings' => 'service_image_4_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('service_image_4_phone', array(
+		'default' => '+33 1 53 31 25 23',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_4_phone', array(
+		'label' => 'Numéro de téléphone du service 4',
+		'section' => 'services-section',
+		'settings' => 'service_image_4_phone',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('service_image_4_email', array(
+		'default' => 'info@esgi.com',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('service_image_4_email', array(
+		'label' => 'Adresse e-mail du service 4',
+		'section' => 'services-section',
+		'settings' => 'service_image_4_email',
+		'type' => 'text',
+	));
+
 	//partners_title
 	$wp_customize->add_setting('partners_title', array(
 		'default' => 'Nos partenaires',
@@ -278,6 +451,7 @@ function register_customizer_settings($wp_customize) {
 		'settings' => 'partners_title',
 		'type' => 'text',
 	));
+	
 
 	//partner_logo_1
 	
@@ -347,9 +521,217 @@ function register_customizer_settings($wp_customize) {
 		'section' => 'partners-section',
 		'settings' => 'partner_logo_6',
 	)));
+
+	//sur la page services  
+	
+	$wp_customize->add_setting('copr_title', array(
+		'default' => 'Notre copr',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('copr_title', array(
+		'label' => 'Titre de la section copr',
+		'section' => 'copr-section',
+		'settings' => 'copr_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('copr_description', array(
+		'default' => 'Description de notre copr',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('copr_description', array(
+		'label' => 'Description de la section copr',
+		'section' => 'copr-section',
+		'settings' => 'copr_description',
+		'type' => 'textarea',
+	));
+
+	$wp_customize->add_setting('image_page_services', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'image_page_services', array(
+		'label' => 'Image de la page services',
+		'section' => 'copr-section',
+		'settings' => 'image_page_services',
+	)));
 	
 
+	//section contact
+
+	$wp_customize->add_setting('contact_title', array(
+		'default' => 'Nous contacter',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_title', array(
+		'label' => 'Titre de la section contact',
+		'section' => 'contact-section',
+		'settings' => 'contact_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_description', array(
+		'default' => 'Description de la section contact',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_description', array(
+		'label' => 'Description de la section contact',
+		'section' => 'contact-section',
+		'settings' => 'contact_description',
+		'type' => 'textarea',
+	));
+
+	//info-contact
+
+	$wp_customize->add_setting('contact_info_1_title', array(
+		'default' => 'Informations de contact',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_1_title', array(
+		'label' => 'Titre de la section informations de contact',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_1_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_1_phone', array(
+		'default' => '06 00 00 00 00',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_1_phone', array(
+		'label' => 'Numéro de téléphone',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_1_phone',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_1_email', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_1_email', array(
+		'label' => 'Adresse email',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_1_email',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_2_title', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_2_title', array(
+		'label' => 'Titre de la section informations de contact',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_2_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_2_phone', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_2_phone', array(
+		'label' => 'Numéro de téléphone',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_2_phone',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_2_email', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_2_email', array(
+		'label' => 'Adresse email',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_2_email',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_3_title', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_3_title', array(
+		'label' => 'Titre de la section informations de contact',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_3_title',
+		'type' => 'text',
+	));
+
+
+	$wp_customize->add_setting('contact_info_3_phone', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+
+	$wp_customize->add_control('contact_info_3_phone', array(
+		'label' => 'Numéro de téléphone',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_3_phone',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_info_3_email', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_info_3_email', array(
+		'label' => 'Adresse email',
+		'section' => 'contact-info-section',
+		'settings' => 'contact_info_3_email',
+		'type' => 'text',
+	));
+
+
+	//section contact-form
+
+	$wp_customize->add_setting('contact_form_title', array(
+		'default' => 'Formulaire de contact',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_form_title', array(
+		'label' => 'Titre de la section formulaire de contact',
+		'section' => 'contact-form-section',
+		'settings' => 'contact_form_title',
+		'type' => 'text',
+	));
+
+	$wp_customize->add_setting('contact_form_description', array(
+		'default' => '',
+		'transport' => 'refresh',
+	));
+
+	$wp_customize->add_control('contact_form_description', array(
+		'label' => 'Description de la section formulaire de contact',
+		'section' => 'contact-form-section',
+		'settings' => 'contact_form_description',
+		'type' => 'textarea',
+	));
+
+
 	
+
+
+	
+
+
 
 }
 
