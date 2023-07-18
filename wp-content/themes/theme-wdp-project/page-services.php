@@ -1,3 +1,9 @@
+<?php
+/*
+Template Name: Services
+*/
+?>
+
 <?php get_header(); ?>
 
 <section class="services-section">

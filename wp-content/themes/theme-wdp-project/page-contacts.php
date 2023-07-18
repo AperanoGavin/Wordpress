@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Contacts
+*/
+?>
 <?php get_header(); ?>
 
 <section class="contact-section">

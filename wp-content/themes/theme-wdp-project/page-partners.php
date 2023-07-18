@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Partners
+*/
+?>
 <?php get_header(); ?>
 <section class="partners-section">
     <div class="container">
