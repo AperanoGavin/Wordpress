@@ -137,7 +137,7 @@ if(!function_exists('register_customizer_sections')){
 		//section copr-section
 
 		$wp_customize->add_section('copr-section', array(
-			'title' => 'Section du footer',
+			'title' => 'Section du footer pour copr-section',
 			'priority' => 70,
 		));
 
@@ -161,6 +161,20 @@ if(!function_exists('register_customizer_sections')){
 		$wp_customize->add_section('contact-info-section', array(
 			'title' => 'Section d\'information de contact',
 			'priority' => 100,
+		));
+
+		//ajoute le footer
+
+		$wp_customize->add_section('footer-section', array(
+			'title' => 'Section du footer',
+			'priority' => 110,
+		));
+
+		//ajout du header 
+
+		$wp_customize->add_section('header-section-logo', array(
+			'title' => 'Section du header logo',
+			'priority' => 120,
 		));
 
 
@@ -744,11 +758,30 @@ if(!function_exists('register_customizer_settings')){
 			'type' => 'textarea',
 		));
 
+		//footer(footer-section)
 
-		
+		$wp_customize->add_setting('image_footer', array(
+			'default' => '',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'image_footer', array(
+			'label' => 'Image du footer',
+			'section' => 'footer-section',
+			'settings' => 'image_footer',
+		)));
 
 
-		
+		$wp_customize->add_setting('image_header', array(
+			'default' => '',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'image_header', array(
+			'label' => 'Image du header',
+			'section' => 'header-section-logo',
+			'settings' => 'image_header',
+		)));
 
 
 

@@ -11,19 +11,16 @@
 	<header class="mt-3 mb-3">
 	<div class="container-fluid">
 		<div class="d-flex justify-content-between align-items-center justify-content-center">
-			<div class="logo">
-				<?php
-				$logo_url = get_template_directory_uri() . '/src/images/svg/logo.svg';
-				$logo = '<img src="' . $logo_url . '" alt="Logo">';
-				echo $logo;
-				?>
+			<div class="header-section-logo">
+				<?php $image_header = get_theme_mod('image_header'); ?>
+					<?php if ($image_header) : ?>
+						<img src="<?php echo $image_header; ?>" alt="Image du header">
+					<?php endif; ?>
 			</div>
 
 			<nav class="main-menu navbar navbar-expand-md">
 				<button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-collapse" aria-controls="menu-collapse" aria-expanded="false" aria-label="Toggle navigation">
-<!-- 					<span class="navbar-toggler-icon" style="background-color: black"></span> -->				
-					<!-- met le svg menu à la place qui se trouve dans src/images/svg/menu.svg -->
-					<?php
+ 				<?php
 					$menu_url = get_template_directory_uri() . '/src/images/svg/menu.svg';
 					$menu = '<img src="' . $menu_url . '" alt="Menu">';
 					echo $menu;
