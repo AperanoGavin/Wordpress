@@ -262,6 +262,84 @@ if(!function_exists('register_customizer_settings')){
 			'type' => 'textarea',
 		));
 
+		//ajoute 3 titre et 3 content pour la section image-left-section about_title_1 
+		
+		$wp_customize->add_setting('about_title_1', array(
+			'default' => 'Titre 1',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_title_1', array(
+			'label' => 'Titre 1',
+			'section' => 'image-left-section',
+			'settings' => 'about_title_1',
+			'type' => 'text',
+		));
+
+		$wp_customize->add_setting('about_content_1', array(
+			'default' => 'Contenu 1',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_content_1', array(
+			'label' => 'Contenu 1',
+			'section' => 'image-left-section',
+			'settings' => 'about_content_1',
+			'type' => 'textarea',
+		));
+
+
+		$wp_customize->add_setting('about_title_2', array(
+			'default' => 'Titre 2',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_title_2', array(
+			'label' => 'Titre 2',
+			'section' => 'image-left-section',
+			'settings' => 'about_title_2',
+			'type' => 'text',
+		));
+
+		$wp_customize->add_setting('about_content_2', array(
+			'default' => 'Contenu 2',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_content_2', array(
+			'label' => 'Contenu 2',
+			'section' => 'image-left-section',
+			'settings' => 'about_content_2',
+			'type' => 'textarea',
+		));
+
+
+		$wp_customize->add_setting('about_title_3', array(
+			'default' => 'Titre 3',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_title_3', array(
+			'label' => 'Titre 3',
+			'section' => 'image-left-section',
+			'settings' => 'about_title_3',
+			'type' => 'text',
+		));
+
+		$wp_customize->add_setting('about_content_3', array(
+			'default' => 'Contenu 3',
+			'transport' => 'refresh',
+		));
+
+		$wp_customize->add_control('about_content_3', array(
+			'label' => 'Contenu 3',
+			'section' => 'image-left-section',
+			'settings' => 'about_content_3',
+			'type' => 'textarea',
+		));
+
+
+
 
 		// Services
 		$wp_customize->add_setting('services_title', array(

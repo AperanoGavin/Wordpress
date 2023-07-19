@@ -32,7 +32,22 @@
                 <?php endif; ?>
             </div>
             <div class="col-md-6">
-                <p><?php echo get_theme_mod('right_description', 'Description de droite'); ?></p>
+                <div class="col-md-4">
+                    <h4><?php echo get_theme_mod('about_title_1', 'Titre 1'); ?></h4>
+                    <p><?php echo get_theme_mod('about_content_1', 'Contenu 1'); ?></p>
+                </div>
+                <div class="col-md-4">
+                    <h4><?php echo get_theme_mod('about_title_2', 'Titre 2'); ?></h4>
+                    <p><?php echo get_theme_mod('about_content_2', 'Contenu 2'); ?></p>
+                </div>
+                <div class="col-md-4">
+                    <h4><?php echo get_theme_mod('about_title_3', 'Titre 3'); ?></h4>
+                    <p><?php echo get_theme_mod('about_content_3', 'Contenu 3'); ?></p>
+                </div>
+            </div>
+             <!-- fait 3 div avec dans chacune un titre et une description -->
+            <div class="row">
+                
             </div>
         </div>
     </div>
