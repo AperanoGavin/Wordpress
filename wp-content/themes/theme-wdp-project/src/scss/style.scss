@@ -13,3 +13,8 @@ Version: 1.0
 
 @import "vendor/normalize";
 @import "vendor/bootstrap-grid.min";
+
+@import "partials/colors.scss";
+@import "partials/fonts.scss";
+
+@import "components/text-default-style";
