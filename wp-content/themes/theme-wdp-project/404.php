@@ -33,14 +33,17 @@ body {
 </style>
 
 <header class="page-header alignwide">
-  <h1 class="page-title"><?php esc_html_e( '404 Error.', 'twentytwentyone' ); ?></h1>
+  <h1 class="page-title" style="color:white;"><?php esc_html_e( '404 Error.', 'twentytwentyone' ); ?></h1>
 </header><!-- .page-header -->
 
 <div class="error-404 not-found default-max-width">
   <div class="page-content">
-    <p><?php esc_html_e( 'The page you were looking for couldn\'t be found. Maybe try a search?', 'twentytwentyone' ); ?></p>
+    <p style="color:white;"><?php esc_html_e( 'The page you were looking for couldn\'t be found. Maybe try a search?', 'twentytwentyone' ); ?></p>
 
-    <?php get_search_form(); // Ajoute le formulaire de recherche ?>
+    <form role="search" method="get" class="search-form" action="<?php echo custom_search_form_action( home_url( '/' ) ); ?>">
+						<input type="search" class="form-control" placeholder="<?php echo esc_attr_x( 'Search...', 'placeholder' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+						<button type="submit" class="btn btn-primary mt-2"><?php echo esc_attr_x( 'Search', 'submit button' ); ?></button>
+					</form>
   </div><!-- .page-content -->
 </div><!-- .error-404 -->
 

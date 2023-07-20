@@ -30,9 +30,64 @@ if(!function_exists('esgi_init')){
 if(!function_exists('esgi_after_setup_theme')){
 	function esgi_after_setup_theme(){
 		add_theme_support('custom-logo');
+		add_theme_support('post-thumbnails');
+		add_theme_support('widgets');
+
 	}
 	add_action('after_setup_theme','esgi_after_setup_theme');
 }
+
+// Enregistrement des zones de widgets
+
+if(!function_exists('esgi_widgets_init')){
+	function esgi_widgets_init(){
+		register_sidebar([
+			'name' => __('Zone de widget de la barre latérale', 'ESGI'),
+			'id' => 'sidebar_widget_zone',
+			'description' => __('Widgets affichés dans le footer', 'ESGI'),
+			'before_widget' => '',
+			'after_widget' => ''
+		]);
+	}
+	add_action('widgets_init', 'esgi_widgets_init');
+}
+
+// Déclaration des routes AJAX
+add_action( 'wp_ajax_load_posts', 'esgi_ajax_load_posts' );
+add_action( 'wp_ajax_nopriv_load_posts', 'esgi_ajax_load_posts' );
+
+function esgi_ajax_load_posts(){
+	$paged = $_POST['page'];
+	$base = $_POST['base'];
+	// ouverture du cache php
+	ob_start();
+	// ecriture du contenu
+	include('template-parts/post-list.php');
+	// Fermeture du cache et renvoi de son contenu
+	echo ob_get_clean();
+	die();
+}
+
+function esgi_custom_comments_template( $comment_template ) {
+    if ( is_singular() ) {
+        return get_template_directory() . '/comments.php';
+    }
+    return $comment_template;
+}
+add_filter( 'comments_template', 'esgi_custom_comments_template' );
+
+
+
+function custom_search_form_action($form_action)
+{
+	if ( is_search() ) {
+        return $form_action; // Utilisez l'URL de recherche par défaut de WordPress pour la page de résultats de recherche.
+    }
+    return get_template_directory_uri() . '/template-parts/searchform.php'; // Utilisez le chemin vers le fichier searchform.php personnalisé pour les autres pages.
+}
+add_filter('get_search_form_action', 'custom_search_form_action');
+
+
 
 if(!function_exists('enqueue_bootstrap')){
 	function enqueue_bootstrap() {
@@ -48,6 +103,15 @@ if(!function_exists('enqueue_bootstrap')){
 if(!function_exists('esgi_enqueue_assets')){
 	function esgi_enqueue_assets(){
 		wp_enqueue_style('main', get_stylesheet_uri());
+		$big = 999999999; // need an unlikely integer
+		$base = str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) );
+		
+		// Injection d'une variable dans le js
+		$variables = [
+			'ajaxURL' => admin_url('admin-ajax.php'),
+			'baseURL' => $base
+		];
+		wp_localize_script('main', 'esgi', $variables);
 	}
 	add_action('wp_enqueue_scripts', 'esgi_enqueue_assets');
 }
@@ -176,6 +240,8 @@ if(!function_exists('register_customizer_sections')){
 			'title' => 'Section du header logo',
 			'priority' => 120,
 		));
+
+		
 
 
 		// Ajoutez d'autres sections si nécessaire
@@ -868,3 +934,85 @@ if(!function_exists('register_customizer_settings')){
 	add_action('customize_register', 'register_customizer_settings');
 }
 
+
+
+// CUSTOMIZER DE THEME
+add_action('customize_register', 'esgi_customize_register');
+function esgi_customize_register($wp_customize){
+	// ajouter une section ESGI
+	$wp_customize->add_section( 'esgi', array(
+	  'title' => __( 'Paramètres ESGI', 'ESGI' ),
+	  'description' => __( 'Faites-vous plaisir !!', 'ESGI' ),
+	  //'panel' => '', // Not typically needed.
+	  'priority' => 1,
+	  'capability' => 'edit_theme_options',
+	  //'theme_supports' => '', // Rarely needed.
+	) );
+
+	// Ajouter des settings
+	$wp_customize->add_setting( 'is_dark', array(
+	  'type' => 'theme_mod', // or 'option'
+	  'transport' => 'refresh', // or postMessage
+	  'sanitize_callback' => 'esgi_sanitize_bool',
+	) );
+
+	$wp_customize->add_setting( 'has_sidebar', array(
+	  'type' => 'theme_mod', // or 'option'
+	  'transport' => 'refresh', // or postMessage
+	  'sanitize_callback' => 'esgi_sanitize_bool',
+	) );
+
+	$wp_customize->add_setting( 'main-color', array(
+	  'type' => 'theme_mod', // or 'option'
+	  'transport' => 'refresh', // or postMessage
+	  'sanitize_callback' => 'sanitize_hex_color',
+	) );
+
+	// Ajouter des controls
+	$wp_customize->add_control( 'is_dark', array(
+	  'type' => 'checkbox',
+	  'priority' => 1, // Within the section.
+	  'section' => 'esgi', // Required, core or custom.
+	  'label' => __( 'Dark theme', 'ESGI' ),
+	  'description' => __( 'Black is beautiful :)' ),
+	  //'active_callback' => 'is_front_page',
+	) );
+
+	$wp_customize->add_control( 'has_sidebar', array(
+	  'type' => 'checkbox',
+	  'priority' => 2, // Within the section.
+	  'section' => 'esgi', // Required, core or custom.
+	  'label' => __( 'Afficher une barre latérale', 'ESGI' ),
+	  'description' => __( 'Toujours utile pour afficher des widgets...' ),
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main-color', array(
+		  'label' => __( 'Couleur principale', 'ESGI' ),
+		  'section' => 'esgi',
+		) ) );
+}
+
+
+function esgi_sanitize_bool($value){
+	return is_bool($value) ? $value : false;
+}
+
+// Hack des classes du body
+add_filter('body_class', 'esgi_body_class', 100, 1);
+function esgi_body_class($classes){
+	if(get_theme_mod('is_dark', false)){
+		$classes[] = 'dark';
+	}
+	return $classes;
+}
+
+
+add_action('wp_head', 'esgi_wp_head', 100);
+function esgi_wp_head(){
+	$mainColor = get_theme_mod('main-color', '#3F51B5');
+	echo '<style>
+	:root{
+		--main-color : ' . $mainColor . '
+	}
+	</style>';
+}

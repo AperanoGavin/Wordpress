@@ -37,7 +37,19 @@
                 <?php endif; ?>
             </div>
             <div class="col-md-6">
-                <p><?php echo get_theme_mod('right_description', 'Description de droite'); ?></p>
+                <div class="col-md-4">
+                        <h4><?php echo get_theme_mod('about_title_1', 'Titre 1'); ?></h4>
+                        <p><?php echo get_theme_mod('about_content_1', 'Contenu 1'); ?></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4><?php echo get_theme_mod('about_title_2', 'Titre 2'); ?></h4>
+                        <p><?php echo get_theme_mod('about_content_2', 'Contenu 2'); ?></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4><?php echo get_theme_mod('about_title_3', 'Titre 3'); ?></h4>
+                        <p><?php echo get_theme_mod('about_content_3', 'Contenu 3'); ?></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -50,9 +62,9 @@
             <div class="col-md-3">
                 <img src="<?php echo get_theme_mod('service_image_1'); ?>" alt="Image 1">
                 <div class="service-info">
-                    <p "><?php echo get_theme_mod('service_image_1_title', 'Manager'); ?></p>
-                    <p "><?php echo get_theme_mod('service_image_1_phone', '+33 1 53 31 25 23'); ?></p>
-                    <p "><?php echo get_theme_mod('service_image_1_email', 'info@esgi.com'); ?></p>
+                    <p ><?php echo get_theme_mod('service_image_1_title', 'Manager'); ?></p>
+                    <p ><?php echo get_theme_mod('service_image_1_phone', '+33 1 53 31 25 23'); ?></p>
+                    <p ><?php echo get_theme_mod('service_image_1_email', 'info@esgi.com'); ?></p>
                 </div>
             </div>
             <div class="col-md-3">
